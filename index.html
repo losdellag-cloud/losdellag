@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Los del Lag — Comunidad Minecraft</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     .glass {
       background: linear-gradient(to bottom right, rgba(16,185,129,.15), rgba(16,185,129,.05));
@@ -14,7 +13,6 @@
     html { scroll-behavior: smooth; }
   </style>
 </head>
-
 <body class="bg-neutral-950 text-neutral-100">
   <!-- NAV -->
   <header class="sticky top-0 z-40 border-b border-neutral-800/60 bg-neutral-950/75 backdrop-blur">
@@ -23,7 +21,6 @@
         <img alt="Logo" class="w-8 h-8 rounded" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Minecraft_face.png">
         <span class="font-bold">Los del Lag</span>
       </div>
-
       <div class="hidden md:flex gap-2 text-sm">
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#anuncios">Anuncios</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#eventos">Eventos</a>
@@ -264,8 +261,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
-    const SUPABASE_URL = "https://TU-PROYECTO.supabase.co";   // <-- reemplazar
-    const SUPABASE_ANON = "TU-ANON-KEY";                      // <-- reemplazar
+    const SUPABASE_URL = "losdellag-cloud's Project";   // <-- reemplazar
+    const SUPABASE_ANON = "yyzkzodgbbaqiylktsst";                      // <-- reemplazar
 
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
@@ -374,11 +371,9 @@
             ${media}
           </div>
         `;
-
         postsEl.appendChild(card);
       }
     }
-
     formEl.addEventListener("submit", async (e) => {
       e.preventDefault();
 
