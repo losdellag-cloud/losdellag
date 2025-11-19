@@ -29,11 +29,12 @@
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#comunidad">Comunidad</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#join">Cómo entrar</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#normas">Normas</a>
-     <button
+    <button
   class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded"
   onclick="loginWithDiscord()">
   Discord
 </button>
+
       </div>
     </nav>
   </header>
@@ -264,17 +265,21 @@
   </script>
 
   <!-- SUPABASE -->
- <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<!-- SUPABASE -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-  const supabaseUrl = "https://amdvcpgfzdridyyptkfr.supabase.co"; // proyecto nuevo
-  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtZHZjcGdmemRyaWR5eXB0a2ZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MzIzMDcsImV4cCI6MjA3OTEwODMwN30.FvpGqFesa6OhBay1mixLPhaKNR_L2wRn0zNCU5-orSk"; // la de Settings → API
+  // Proyecto nuevo
+  const supabaseUrl = "https://amdvcpgfzdridyyptkfr.supabase.co";
+  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtZHZjcGdmemRyaWR5eXB0a2ZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MzIzMDcsImV4cCI6MjA3OTEwODMwN30.FvpGqFesa6OhBay1mixLPhaKNR_L2wRn0zNCU5-orSk";
 
   const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
+  // Login con Discord
   async function loginWithDiscord() {
     const { data, error } = await client.auth.signInWithOAuth({
       provider: "discord",
       options: {
+        // A dónde vuelve DESPUÉS de logearse
         redirectTo: "https://losdellag-cloud.github.io/losdellag/"
       }
     });
@@ -285,5 +290,6 @@
     }
   }
 </script>
+
 </body>
 </html>
