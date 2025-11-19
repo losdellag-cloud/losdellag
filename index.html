@@ -29,7 +29,7 @@
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#comunidad">Comunidad</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#join">Cómo entrar</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#normas">Normas</a>
-      <button
+     <button
   class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded"
   onclick="loginWithDiscord()">
   Discord
@@ -264,42 +264,26 @@
   </script>
 
   <!-- SUPABASE -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+ <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-  // 1) Cliente de Supabase
-  const supabaseUrl = "https://yyzkzodgbbaqiylktsst.supabase.co";
-  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5emt6b2RnYmJhcWl5bGt0c3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MTA1ODQsImV4cCI6MjA3OTA4NjU4NH0.sAKbEOsaUR_OQve9GJEep6tmpT6sxS3ePNHfMatPSkY"; // usa el que ya tenías
+  const supabaseUrl = "https://amdvcpgfzdridyyptkfr.supabase.co"; // proyecto nuevo
+  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtZHZjcGdmemRyaWR5eXB0a2ZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MzIzMDcsImV4cCI6MjA3OTEwODMwN30.FvpGqFesa6OhBay1mixLPhaKNR_L2wRn0zNCU5-orSk"; // la de Settings → API
+
   const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-  // 2) Login con Discord
   async function loginWithDiscord() {
-  const { data, error } = await client.auth.signInWithOAuth({
-    provider: "discord",
-    options: {
-      redirectTo: "https://losdellag-cloud.github.io/losdellag/",
-      scopes: "openid identify email"
-    }
-  });
-
-  if (error) {
-    alert("Error Discord: " + error.message);
-  }
-}
-
-  // 3) (Opcional) Login con GitHub, si lo usas para el botón de abajo
-  async function loginWithGithub() {
     const { data, error } = await client.auth.signInWithOAuth({
-      provider: "github",
+      provider: "discord",
       options: {
         redirectTo: "https://losdellag-cloud.github.io/losdellag/"
       }
     });
 
     if (error) {
-      alert("Error GitHub: " + error.message);
+      console.error(error);
+      alert("Error Discord: " + error.message);
     }
   }
 </script>
-
 </body>
 </html>
