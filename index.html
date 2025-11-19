@@ -29,11 +29,11 @@
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#comunidad">Comunidad</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#join">Cómo entrar</a>
         <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#normas">Normas</a>
-       <a class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded"
-   target="_blank"
-   href="https://discord.com/oauth2/authorize?client_id=1440573468906225719&redirect_uri=https%3A%2F%2Fyyzkzodgbbaqiylktsst.supabase.co%2Fauth%2Fv1%2Fcallback&response_type=code&scope=openid%20email%20profile">
-   Discord
-</a>
+      <button
+  class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded"
+  onclick="loginWithDiscord()">
+  Discord
+</button>
       </div>
     </nav>
   </header>
@@ -264,172 +264,41 @@
   </script>
 
   <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+  // 1) Cliente de Supabase
+  const supabaseUrl = "https://yyzkzodgbbaqiylktsst.supabase.co";
+  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5emt6b2RnYmJhcWl5bGt0c3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MTA1ODQsImV4cCI6MjA3OTA4NjU4NH0.sAKbEOsaUR_OQve9GJEep6tmpT6sxS3ePNHfMatPSkY"; // usa el que ya tenías
+  const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-  <script>
-    const SUPABASE_URL = "https://yyzkzodgbbaqiylktsst.supabase.co";   // <-- reemplazar
-    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5emt6b2RnYmJhcWl5bGt0c3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MTA1ODQsImV4cCI6MjA3OTA4NjU4NH0.sAKbEOsaUR_OQve9GJEep6tmpT6sxS3ePNHfMatPSkY";                      // <-- reemplazar
-
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-
-    const postsEl = document.getElementById("posts");
-    const formEl = document.getElementById("post-form");
-    const textEl = document.getElementById("post-text");
-    const fileEl = document.getElementById("post-file");
-    const authUserEl = document.getElementById("auth-user");
-    const authButtonsEl = document.getElementById("auth-buttons");
-    const logoutBtn = document.getElementById("btn-logout");
-
-    const OAUTH_PROVIDERS = [
-      { id: "discord", label: "Discord" },
-      { id: "google", label: "Google" },
-      { id: "github", label: "GitHub" },
-      { id: "twitch", label: "Twitch" },
-      { id: "twitter", label: "Twitter" },
-      { id: "microsoft", label: "Microsoft" },
-      { id: "facebook", label: "Facebook" },
-      { id: "apple", label: "Apple" }
-    ];
-
-    function renderAuthButtons() {
-      authButtonsEl.innerHTML = "";
-      for (const p of OAUTH_PROVIDERS) {
-        const btn = document.createElement("button");
-        btn.className = "px-3 py-2 rounded border border-neutral-700 hover:bg-neutral-800";
-        btn.textContent = `Entrar con ${p.label}`;
-
-        btn.addEventListener("click", async () => {
-          await sb.auth.signInWithOAuth({
-            provider: p.id,
-            options: { redirectTo: window.location.href }
-          });
-        });
-
-        authButtonsEl.appendChild(btn);
+  // 2) Login con Discord
+  async function loginWithDiscord() {
+    const { data, error } = await client.auth.signInWithOAuth({
+      provider: "discord",
+      options: {
+        redirectTo: "https://losdellag-cloud.github.io/losdellag/"
       }
-    }
-
-    async function setAuthUI() {
-      const { data: { session } } = await sb.auth.getSession();
-      const isLogged = !!session;
-
-      authUserEl.textContent = isLogged
-        ? (session.user.email || "Usuario")
-        : "Visitante";
-
-      textEl.disabled = !isLogged;
-      fileEl.disabled = !isLogged;
-      formEl.querySelector("button[type='submit']").disabled = !isLogged;
-
-      authButtonsEl.classList.toggle("hidden", isLogged);
-      logoutBtn.classList.toggle("hidden", !isLogged);
-    }
-
-    sb.auth.onAuthStateChange((_event, _session) => {
-      setAuthUI();
-      loadPosts();
     });
 
-    logoutBtn.addEventListener("click", async () => {
-      await sb.auth.signOut();
-    });
-
-    async function loadPosts() {
-      postsEl.innerHTML = "";
-
-      const { data, error } = await sb
-        .from("posts")
-        .select("id, text, media_url, media_type, created_at, profiles(username, rank)")
-        .order("created_at", { ascending: false })
-        .limit(50);
-
-      if (error) {
-        postsEl.innerHTML = `<div class="text-red-400">${error.message}</div>`;
-        return;
-      }
-
-      for (const p of data) {
-        const rank = (p.profiles?.rank || "cobre").toLowerCase();
-
-        const RANK_STYLE = {
-          cobre: "bg-amber-800/40 text-amber-300 border border-amber-800",
-          hierro: "bg-gray-700/40 text-gray-200 border border-gray-700",
-          oro: "bg-yellow-700/40 text-yellow-200 border border-yellow-700",
-          esmeralda: "bg-emerald-700/40 text-emerald-200 border border-emerald-700",
-          diamante: "bg-cyan-700/40 text-cyan-100 border border-cyan-700"
-        };
-
-        const badge = RANK_STYLE[rank] || RANK_STYLE.cobre;
-
-        const media = p.media_url
-          ? p.media_type.startsWith("video/")
-            ? `<video class="w-full rounded" controls src="${p.media_url}"></video>`
-            : `<img class="w-full rounded" src="${p.media_url}" />`
-          : "";
-
-        const card = document.createElement("article");
-        card.className = "border border-neutral-800 rounded-xl overflow-hidden";
-        card.innerHTML = `
-          <div class="${badge} px-3 py-2 text-xs uppercase">${rank}</div>
-          <div class="p-4 space-y-3">
-            <div class="text-sm text-neutral-400">${p.profiles?.username || "Usuario"} • ${new Date(p.created_at).toLocaleString()}</div>
-            <div class="text-neutral-200 text-sm">${p.text || ""}</div>
-            ${media}
-          </div>
-        `;
-        postsEl.appendChild(card);
-      }
+    if (error) {
+      alert("Error Discord: " + error.message);
     }
-    formEl.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  }
 
-      const { data: { session } } = await sb.auth.getSession();
-      if (!session) return alert("Debes iniciar sesión.");
-
-      const text = textEl.value.trim();
-      if (!text && !fileEl.files[0])
-        return alert("Debes escribir algo o subir un archivo.");
-
-      let media_url = null;
-      let media_type = null;
-
-      if (fileEl.files[0]) {
-        const f = fileEl.files[0];
-
-        const path = `${session.user.id}/${Date.now()}_${f.name}`;
-
-        const { error: uploadErr } = await sb.storage
-          .from("posts")
-          .upload(path, f, { contentType: f.type });
-
-        if (uploadErr) return alert(uploadErr.message);
-
-        const { data: pub } = sb.storage.from("posts").getPublicUrl(path);
-        media_url = pub.publicUrl;
-        media_type = f.type;
+  // 3) (Opcional) Login con GitHub, si lo usas para el botón de abajo
+  async function loginWithGithub() {
+    const { data, error } = await client.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: "https://losdellag-cloud.github.io/losdellag/"
       }
-
-      const { error: insertErr } = await sb.from("posts").insert({
-        user_id: session.user.id,
-        text,
-        media_url,
-        media_type
-      });
-
-      if (insertErr) return alert(insertErr.message);
-
-      textEl.value = "";
-      fileEl.value = "";
-      loadPosts();
     });
 
-    // Init
-    (async () => {
-      renderAuthButtons();
-      await setAuthUI();
-      await loadPosts();
-    })();
-  </script>
+    if (error) {
+      alert("Error GitHub: " + error.message);
+    }
+  }
+</script>
 
 </body>
 </html>
