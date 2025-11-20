@@ -1,312 +1,327 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Los del Lag — Comunidad Minecraft</title>
+  <meta charset="UTF-8" />
+  <title>Los del Lag - Comunidad Minecraft</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    .glass {
-      background: linear-gradient(to bottom right, rgba(16,185,129,.15), rgba(16,185,129,.05));
-      backdrop-filter: blur(6px);
-    }
-    html { scroll-behavior: smooth; }
+    /* Scrollbar un poco gamer */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #050816; }
+    ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 999px; }
   </style>
 </head>
+
 <body class="bg-neutral-950 text-neutral-100">
-  <!-- NAV -->
-  <header class="sticky top-0 z-40 border-b border-neutral-800/60 bg-neutral-950/75 backdrop-blur">
-    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <img alt="Logo" class="w-8 h-8 rounded" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Minecraft_face.png">
-        <span class="font-bold">Los del Lag</span>
-      </div>
-      <div class="hidden md:flex gap-2 text-sm">
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#anuncios">Anuncios</a>
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#eventos">Eventos</a>
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#staff">Equipo</a>
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#galeria">Galería</a>
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#comunidad">Comunidad</a>
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#join">Cómo entrar</a>
-        <a class="px-3 py-2 rounded hover:bg-neutral-800" href="#normas">Normas</a>
-    <button
-  class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded"
-  onclick="loginWithDiscord()">
-  Discord
-</button>
+  <main class="min-h-screen">
 
-      </div>
-    </nav>
-  </header>
+    <!-- ================= HERO / BANNER ================= -->
+    <section id="inicio" class="relative overflow-hidden">
+      <!-- Fondo grande -->
+      <img src="img/fondo-minecraft.jpg"
+           alt="Fondo Minecraft"
+           class="absolute inset-0 w-full h-full object-cover opacity-40">
 
-  <!-- HERO -->
-  <section class="relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-emerald-600/10 to-transparent"></div>
-    <div class="max-w-6xl mx-auto px-4 py-14">
-      <div class="text-center space-y-4">
-        <span class="text-xs uppercase tracking-widest text-emerald-400/90">Comunidad Minecraft</span>
-        <h1 class="text-3xl md:text-5xl font-extrabold">Rompe el lag y juega con nosotros</h1>
+      <div class="relative max-w-6xl mx-auto px-4 py-10 md:py-16">
+        <!-- Top bar: logo + login -->
+        <header class="flex items-center justify-between gap-4 mb-10">
+          <div class="flex items-center gap-3">
+            <img src="img/logo-los-del-lag.jpg"
+                 alt="Logo Los del Lag"
+                 class="w-14 h-14 rounded-full border border-emerald-400 shadow-lg object-cover">
+            <div>
+              <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+                Los del Lag
+              </h1>
+              <p class="text-sm text-emerald-300/80">
+                Comunidad de Minecraft • Survival + Eventos
+              </p>
+            </div>
+          </div>
 
-        <p class="text-neutral-300 max-w-2xl mx-auto">
-          Eventos, construcciones y buen rollo. ¡Únete al Discord y entra al servidor!
-        </p>
+          <!-- Login (visual, luego se puede conectar a tu sistema) -->
+          <button
+            class="bg-neutral-900/70 border border-neutral-700 hover:border-emerald-400 text-sm px-4 py-2 rounded-xl">
+            Iniciar sesión
+          </button>
+        </header>
 
-       <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <!-- Contenido principal hero -->
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <!-- Texto -->
+          <div class="space-y-4">
+            <span class="text-xs uppercase tracking-[0.2em] text-emerald-400/90">
+              Comunidad Minecraft
+            </span>
 
-  <button id="nav-discord" 
-          class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded" 
-          onclick="loginWithDiscord()">
-    Discord
-  </button>
+            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight">
+              Rompe el lag y juega con<br>
+              <span class="text-emerald-400">Los del Lag</span>
+            </h2>
 
-  <a class="border border-neutral-700 hover:bg-neutral-800 px-5 py-3 rounded-lg" href="#eventos">Ver eventos</a>
-  <a class="border border-neutral-700 hover:bg-neutral-800 px-5 py-3 rounded-lg" href="#join">Cómo entrar</a>
+            <p class="text-neutral-300 text-sm md:text-base max-w-xl">
+              Eventos, construcciones, directos y mucho meme.
+              Únete al Discord, consigue tu rango de
+              <span class="text-orange-300 font-semibold">Cobre</span> a
+              <span class="text-sky-300 font-semibold">Diamante</span>
+              y comparte tus mejores clips y capturas del servidor.
+            </p>
 
-  <!-- 📌 Imagen añadida -->
-  <img src="/mnt/data/photo_2025-11-19_21-48-03.jpg"
-       alt="Construcción Minecraft"
-       class="max-w-xs md:max-w-sm w-full rounded-xl shadow-xl border border-neutral-800 mt-6">
-</div>
-<button
-  id="nav-discord"
-  class="ml-1 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded"
-  onclick="loginWithDiscord()">
-  Discord
-</button>
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a id="nav-discord"
+                 href="#discord"
+                 class="bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-4 py-2.5 rounded-xl text-sm">
+                Unirse al Discord
+              </a>
 
-          <a class="border border-neutral-700 hover:bg-neutral-800 px-5 py-3 rounded-lg" href="#eventos">Ver eventos</a>
-          <a class="border border-neutral-700 hover:bg-neutral-800 px-5 py-3 rounded-lg" href="#join">Cómo entrar</a>
+              <a href="#comunidad"
+                 class="border border-neutral-700 hover:border-neutral-500 px-4 py-2.5 rounded-xl text-sm">
+                Ver comunidad
+              </a>
+
+              <a href="#rangos"
+                 class="border border-neutral-700 hover:border-neutral-500 px-4 py-2.5 rounded-xl text-sm">
+                Ver rangos
+              </a>
+            </div>
+
+            <p class="text-xs text-neutral-400">
+              Servidor: <b>mc.tuservidor.xyz</b> • Versión <b>1.21.x</b> • Modo: Survival
+            </p>
+          </div>
+
+          <!-- Imagen banner -->
+          <div class="relative">
+            <div class="rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl bg-neutral-900/60">
+              <img src="img/banner-base.jpg"
+                   alt="Base del servidor Los del Lag"
+                   class="w-full h-full object-cover">
+            </div>
+
+            <!-- mini etiqueta -->
+            <div class="absolute -bottom-4 left-4 bg-neutral-900/90 border border-emerald-500/70 text-xs px-3 py-1.5 rounded-xl flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Servidor en línea • 23 jugadores</span>
+            </div>
+          </div>
         </div>
-
-        <p class="text-sm text-neutral-400">
-          Servidor: <b id="server-ip">mc.tuservidor.xyz</b> • 
-          Versión <b id="server-ver">1.21.x</b> • Modo: Survival + Eventos
-        </p>
       </div>
-    </div>
-  </section>
-  <!-- ANUNCIOS -->
-  <section id="anuncios" class="max-w-6xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-bold mb-4">Anuncios</h2>
+    </section>
 
-    <div class="grid md:grid-cols-3 gap-4">
-      <article class="glass border border-neutral-800 rounded-xl p-4">
-        <h3 class="font-semibold">Evento PvP semanal</h3>
-        <p class="text-sm text-neutral-300">Sábados 20:00 — Premios top 3. Reglas en #anuncios.</p>
-      </article>
+    <!-- ================= SECCIÓN COMUNIDAD ================= -->
+    <section id="comunidad" class="max-w-6xl mx-auto px-4 py-12 md:py-16">
+      <h3 class="text-2xl md:text-3xl font-bold mb-6">Comunidad</h3>
 
-      <article class="glass border border-neutral-800 rounded-xl p-4">
-        <h3 class="font-semibold">Nuevo Nether</h3>
-        <p class="text-sm text-neutral-300">Reinicio limpio y recursos renovados. No greif.</p>
-      </article>
+      <div class="grid lg:grid-cols-[260px,minmax(0,1fr),260px] gap-6 md:gap-10">
 
-      <article class="glass border border-neutral-800 rounded-xl p-4">
-        <h3 class="font-semibold">Buscamos creadores</h3>
-        <p class="text-sm text-neutral-300">¿Streameas? Habla con staff para rol Creador.</p>
-      </article>
-    </div>
-  </section>
+        <!-- Columna izquierda: En línea + Discord + Perfiles -->
+        <aside class="space-y-4">
+          <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4">
+            <h4 class="text-sm font-semibold mb-3 flex items-center justify-between">
+              En línea ahora
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-600/20 text-emerald-300">
+                Rango
+              </span>
+            </h4>
 
-  <!-- EVENTOS -->
-  <section id="eventos" class="max-w-6xl mx-auto px-4 py-10 scroll-mt-24">
-    <h2 class="text-2xl font-bold mb-4">Eventos</h2>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center justify-between">
+                <span>Alessandro6226</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300">
+                  Cobre
+                </span>
+              </li>
+              <li class="flex items-center justify-between">
+                <span>Jotavillaxd</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-gray-400/20 text-gray-200">
+                  Hierro
+                </span>
+              </li>
+              <li class="flex items-center justify-between">
+                <span>lujanherb5370</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-400/20 text-yellow-300">
+                  Oro
+                </span>
+              </li>
+            </ul>
+          </div>
 
-    <div class="grid md:grid-cols-2 gap-4">
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <h3 class="font-semibold">Build Battle</h3>
-        <p class="text-sm text-neutral-300">Sáb 22/11 • 20:00 • Lobby 2 • 24 cupos</p>
-        <a class="mt-2 inline-block bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-4 py-2 rounded"
-           href="#">Inscribirme</a>
+          <div id="discord" class="bg-neutral-900/80 border border-emerald-500/70 rounded-2xl p-4 space-y-3">
+            <h4 class="text-sm font-semibold">Únete a la comunidad</h4>
+            <p class="text-xs text-neutral-300">
+              Entra a nuestro Discord para hablar con el CEO, organizar partidas y
+              proponer eventos.
+            </p>
+            <a href="https://discord.gg/tu-invite"
+               class="block text-center bg-emerald-600 hover:bg-emerald-500 text-black font-semibold text-sm px-3 py-2 rounded-xl">
+              Entrar al Discord
+            </a>
+          </div>
+
+          <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 space-y-2">
+            <h4 class="text-sm font-semibold">Perfiles del staff</h4>
+            <ul class="text-xs space-y-1 text-neutral-300">
+              <li>• Perfil de Alessandro (CEO)</li>
+              <li>• Perfil de Lujan</li>
+              <li>• Perfil de Juanito</li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Centro: publicaciones -->
+        <section class="space-y-4">
+          <!-- Botón publicar (visual) -->
+          <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="text-xs text-neutral-300">
+              Publica tu captura o video. Solo usuarios registrados pueden comentar.
+            </div>
+            <button
+              class="text-xs bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-1.5 rounded-xl">
+              Publicar
+            </button>
+          </div>
+
+          <!-- Post 1 -->
+          <article class="bg-neutral-900/80 border border-neutral-800 rounded-2xl overflow-hidden">
+            <header class="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
+              <div class="flex items-center gap-3">
+                <img src="img/logo-los-del-lag.jpg"
+                     alt="Avatar Alessandro"
+                     class="w-8 h-8 rounded-lg object-cover">
+                <div class="text-xs">
+                  <p class="font-semibold">Alessandro (CEO)</p>
+                  <p class="text-[11px] text-neutral-400">Rango Diamante • hace 2 h</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300">
+                Diamante
+              </span>
+            </header>
+
+            <div class="p-4 space-y-3 text-sm">
+              <p>Mi nueva base en el servidor 🔥 ¿Quién se anima a un tour?</p>
+              <div class="rounded-xl overflow-hidden border border-neutral-800">
+                <img src="img/banner-base.jpg"
+                     alt="Publicación Alessandro"
+                     class="w-full h-full object-cover">
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-neutral-400 pt-1">
+                <span>23 likes • 5 comentarios</span>
+                <button class="hover:text-emerald-300">Comentar</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 2 -->
+          <article class="bg-neutral-900/80 border border-neutral-800 rounded-2xl overflow-hidden">
+            <header class="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-[11px]">
+                  V
+                </div>
+                <div class="text-xs">
+                  <p class="font-semibold">Visitante</p>
+                  <p class="text-[11px] text-neutral-400">Rango Cobre • hace 5 h</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300">
+                Cobre
+              </span>
+            </header>
+
+            <div class="p-4 space-y-3 text-sm">
+              <p>
+                ¡Qué buen canal! Solo los que se registran pueden comentar
+                o publicar video. Me encanta el ambiente de la comunidad 😄
+              </p>
+              <div class="flex items-center justify-between text-[11px] text-neutral-400 pt-1">
+                <span>8 likes • 2 comentarios</span>
+                <button class="hover:text-emerald-300">Responder</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Derecha: Login + redes -->
+        <aside class="space-y-4">
+          <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 space-y-3">
+            <h4 class="text-sm font-semibold mb-1">Login</h4>
+            <p class="text-xs text-neutral-300">
+              Inicia sesión para conseguir rango, comentar y publicar tus clips.
+            </p>
+            <button
+              class="w-full text-sm bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl py-2 mt-1">
+              Entrar con GitHub
+            </button>
+          </div>
+
+          <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4 space-y-3">
+            <h4 class="text-sm font-semibold">Directos & redes</h4>
+            <p class="text-xs text-neutral-300">
+              Síguenos para ver los eventos en vivo.
+            </p>
+
+            <div class="space-y-2 text-sm">
+              <a href="#"
+                 class="block w-full text-left bg-neutral-800 hover:bg-neutral-700 px-3 py-2 rounded-xl">
+                TikTok live
+              </a>
+              <a href="#"
+                 class="block w-full text-left bg-neutral-800 hover:bg-neutral-700 px-3 py-2 rounded-xl">
+                YouTube live
+              </a>
+              <a href="https://discord.gg/tu-invite"
+                 class="block w-full text-left bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-3 py-2 rounded-xl">
+                Síguenos en Discord
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-3">
+            <img src="img/online-bar.png"
+                 alt="Jugadores conectados"
+                 class="w-full rounded-xl object-cover">
+          </div>
+        </aside>
       </div>
+    </section>
 
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <h3 class="font-semibold">UHC amistoso</h3>
-        <p class="text-sm text-neutral-300">Sáb 29/11 • 19:30 • Arena • 40 cupos</p>
-        <a class="mt-2 inline-block bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-4 py-2 rounded"
-           href="#">Inscribirme</a>
+    <!-- ================= SECCIÓN RANGOS ================= -->
+    <section id="rangos" class="max-w-6xl mx-auto px-4 pb-16">
+      <h3 class="text-2xl md:text-3xl font-bold mb-6">Rangos de la comunidad</h3>
+
+      <div class="grid md:grid-cols-4 gap-4 text-sm">
+        <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4">
+          <h4 class="font-semibold mb-1 text-orange-300">Cobre</h4>
+          <p class="text-xs text-neutral-300">
+            Nuevo en el servidor. Puedes reaccionar y empezar a publicar.
+          </p>
+        </div>
+        <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4">
+          <h4 class="font-semibold mb-1 text-gray-200">Hierro</h4>
+          <p class="text-xs text-neutral-300">
+            Jugador activo. Acceso a más eventos y sorteos.
+          </p>
+        </div>
+        <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4">
+          <h4 class="font-semibold mb-1 text-yellow-300">Oro</h4>
+          <p class="text-xs text-neutral-300">
+            Participa seguido en directos y Discord. Más visibilidad en el feed.
+          </p>
+        </div>
+        <div class="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-4">
+          <h4 class="font-semibold mb-1 text-sky-300">Diamante</h4>
+          <p class="text-xs text-neutral-300">
+            Miembros top de la comunidad. Prioridad en eventos y publicaciones destacadas.
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- STAFF -->
-  <section id="staff" class="max-w-6xl mx-auto px-4 py-10 scroll-mt-24">
-    <h2 class="text-2xl font-bold mb-4">Equipo</h2>
-
-    <div class="grid md:grid-cols-3 gap-4">
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <div class="font-semibold">Alessandro6226</div>
-        <div class="text-sm text-neutral-300">Founder • Fundador</div>
-      </div>
-
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <div class="font-semibold">lujanherb5370</div>
-        <div class="text-sm text-neutral-300">Admin</div>
-      </div>
-
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <div class="font-semibold">Jotavillaxd</div>
-        <div class="text-sm text-neutral-300">Staff</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALERÍA -->
-  <section id="galeria" class="max-w-6xl mx-auto px-4 py-10 scroll-mt-24">
-    <h2 class="text-2xl font-bold mb-4">Galería</h2>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-      <img class="rounded-lg border border-neutral-800 object-cover aspect-video"
-           src="https://picsum.photos/seed/castle/800/450" alt="Castillo medieval">
-
-      <img class="rounded-lg border border-neutral-800 object-cover aspect-video"
-           src="https://picsum.photos/seed/redstone/800/450" alt="Redstone">
-
-      <img class="rounded-lg border border-neutral-800 object-cover aspect-video"
-           src="https://picsum.photos/seed/nether/800/450" alt="Nether">
-
-      <img class="rounded-lg border border-neutral-800 object-cover aspect-video"
-           src="https://picsum.photos/seed/end/800/450" alt="End">
-    </div>
-  </section>
-
-  <!-- COMUNIDAD -->
-  <section id="comunidad" class="max-w-6xl mx-auto px-4 py-10 scroll-mt-24">
-    <h2 class="text-2xl font-bold mb-4">Comunidad</h2>
-
-    <div class="flex items-center gap-4 mb-6 text-sm">
-      <span id="auth-user" class="text-neutral-300">Visitante</span>
-
-      <div id="auth-buttons" class="flex flex-wrap gap-2"></div>
-
-      <button id="btn-logout"
-              class="hidden border border-neutral-700 hover:bg-neutral-800 px-3 py-2 rounded">
-        Salir
-      </button>
-    </div>
-
-    <!-- Formulario -->
-    <form id="post-form" class="border border-neutral-800 rounded-xl p-4 grid gap-3 disabled:opacity-60">
-      <label class="text-sm text-neutral-300">Mensaje:</label>
-      <textarea id="post-text"
-                rows="3"
-                class="w-full bg-neutral-900 border border-neutral-800 rounded px-3 py-2"
-                placeholder="¡Miren mi nueva base!"
-                disabled></textarea>
-
-      <label class="text-sm text-neutral-300">Imagen o video (opcional):</label>
-      <input id="post-file"
-             type="file"
-             accept="image/*,video/*"
-             class="text-sm"
-             disabled />
-
-      <button class="bg-emerald-600 hover:bg-emerald-500 text-black font-semibold px-4 py-2 rounded"
-              type="submit"
-              disabled>Publicar</button>
-    </form>
-
-    <div id="posts" class="mt-6 grid md:grid-cols-2 gap-4"></div>
-  </section>
-
-  <!-- CÓMO ENTRAR -->
-  <section id="join" class="max-w-6xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-bold mb-4">Cómo entrar al servidor</h2>
-
-    <div class="grid md:grid-cols-2 gap-4 text-sm text-neutral-300">
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <h3 class="text-white font-semibold mb-2">Java Edition</h3>
-        <ol class="list-decimal pl-5 space-y-1">
-          <li>Abrí Minecraft <b id="java-ver">1.21.x</b></li>
-          <li>Multijugador → Agregar servidor</li>
-          <li>IP: <b id="ip-java">mc.tuservidor.xyz</b></li>
-        </ol>
-      </div>
-
-      <div class="border border-neutral-800 rounded-xl p-4">
-        <h3 class="text-white font-semibold mb-2">Bedrock / PE</h3>
-        <ol class="list-decimal pl-5 space-y-1">
-          <li>Play → Servers → Add Server</li>
-          <li>Address: <b id="ip-bedrock">mc.tuservidor.xyz</b></li>
-          <li>Port: <b>19132</b></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- NORMAS -->
-  <section id="normas" class="max-w-6xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-bold mb-4">Normas básicas</h2>
-
-    <ul class="grid md:grid-cols-2 gap-3 text-sm text-neutral-300">
-      <li class="border border-neutral-800 rounded-xl p-4">Respetar a todos. Cero toxicidad.</li>
-      <li class="border border-neutral-800 rounded-xl p-4">Prohibido hacks y dupes.</li>
-      <li class="border border-neutral-800 rounded-xl p-4">Greif = ban inmediato.</li>
-      <li class="border border-neutral-800 rounded-xl p-4">No spam ni publicidad sin permiso.</li>
-    </ul>
-  </section>
-  <!-- FOOTER -->
-  <footer class="border-t border-neutral-800">
-    <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-neutral-400 flex flex-col md:flex-row items-center justify-between gap-3">
-      <div>© <span id="year"></span> Los del Lag. Hecho con ♥</div>
-
-      <div class="flex gap-3">
-        <a id="yt" class="hover:text-white" target="_blank" href="#">YouTube</a>
-        <a id="tw" class="hover:text-white" target="_blank" href="#">Twitch</a>
-        <a id="dc" class="hover:text-white" target="_blank" href="#">Discord</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- CONFIG -->
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    window.CONFIG = Object.freeze({
-      discord: "https://discord.gg/XSyCH6vy",
-      youtube: "https://www.youtube.com/channel/UCbMmJD-ivCfYCCTMyTUPxFg",
-      twitch: "https://twitch.tv/tucanal",
-      ip: "mc.tuservidor.xyz",
-      version: "1.21.x"
-    });
-
- 
-  document.getElementById("dc").href = CONFIG.discord;
-    document.getElementById("yt").href = CONFIG.youtube;
-    document.getElementById("tw").href = CONFIG.twitch;
-
-    for (const id of ["server-ip", "ip-java", "ip-bedrock"])
-      document.getElementById(id).textContent = CONFIG.ip;
-
-    for (const id of ["server-ver", "java-ver"])
-      document.getElementById(id).textContent = CONFIG.version;
-  </script>
-
-  <!-- SUPABASE -->
-<!-- SUPABASE -->
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script>
-  // Proyecto nuevo
-  const supabaseUrl = "https://amdvcpgfzdridyyptkfr.supabase.co";
-  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtZHZjcGdmemRyaWR5eXB0a2ZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MzIzMDcsImV4cCI6MjA3OTEwODMwN30.FvpGqFesa6OhBay1mixLPhaKNR_L2wRn0zNCU5-orSk";
-
-  const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-  // Login con Discord
-  async function loginWithDiscord() {
-    const { data, error } = await client.auth.signInWithOAuth({
-      provider: "discord",
-      options: {
-        // A dónde vuelve DESPUÉS de logearse
-        redirectTo: "https://losdellag-cloud.github.io/losdellag/"
-      }
-    });
-
-    if (error) {
-      console.error(error);
-      alert("Error Discord: " + error.message);
-    }
-  }
-</script>
-
+  </main>
 </body>
 </html>
